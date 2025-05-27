@@ -2,15 +2,11 @@
 
 namespace App\Modules\Authentication\Actions;
 
-use App\Modules\Authentication\Mails\EmailVerification;
 use App\Modules\Authentication\Models\DTO\CreateUserRequestDTO;
-use App\Modules\Authentication\Models\Entities\EmailVerificationCode;
-use App\Modules\Authentication\Models\Entities\User;
-use App\Modules\Authentication\Services\CodeGenerationService;
+use App\Modules\Common\Models\Entities\User;
 use App\Modules\Authentication\Services\EmailVerificationService;
 use App\Modules\Exceptions\Http\HttpInternalServerException;
 use App\Modules\Security\Services\CryptoService;
-use Illuminate\Support\Facades\Mail;
 
 class CreateUserAction
 {
@@ -19,12 +15,12 @@ class CreateUserAction
     function __construct(
         private CryptoService $cryptoService,
         private EmailVerificationService $emailVerificationService,
-    ){}
+    ) {}
 
     /**
      * @throws HttpInternalServerException
      */
-    function execute(CreateUserRequestDTO $dto):  void
+    function execute(CreateUserRequestDTO $dto): void
     {
         if (!$this->createUser($dto)) throw new HttpInternalServerException("Failed to create user");
         $this->emailVerificationService->sendEmailVerification($this->user);

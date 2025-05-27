@@ -12,7 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('email_verification_code', function (Blueprint $table) {
+        Schema::create('forgot_password_verification_code', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             $table->string('code');
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('email_verification_code');
+        Schema::dropIfExists('forgot_password_verification_code');
     }
 };

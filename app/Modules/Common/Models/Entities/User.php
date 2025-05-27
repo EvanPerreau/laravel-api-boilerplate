@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Authentication\Models\Entities;
+namespace App\Modules\Common\Models\Entities;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Carbon\Carbon;

@@ -4,7 +4,7 @@ namespace App\Modules\Authentication\Actions;
 
 use App\Modules\Authentication\Models\DTO\TokenCoupleDTO;
 use App\Modules\Authentication\Models\DTO\LoginUserRequestDTO;
-use App\Modules\Authentication\Models\Entities\User;
+use App\Modules\Common\Models\Entities\User;
 use App\Modules\Authentication\Services\TokenGenerationService;
 use App\Modules\Exceptions\Http\HttpForbiddenException;
 use App\Modules\Exceptions\Http\HttpUnauthorizedException;

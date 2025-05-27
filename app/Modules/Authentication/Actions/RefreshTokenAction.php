@@ -2,15 +2,14 @@
 
 namespace App\Modules\Authentication\Actions;
 
-use App\Modules\Authentication\Http\Requests\RefreshTokenRequest;
 use App\Modules\Authentication\Models\DTO\TokenCoupleDTO;
 use App\Modules\Authentication\Models\DTO\RefreshTokenRequestDTO;
-use App\Modules\Authentication\Models\Entities\User;
+use App\Modules\Common\Models\Entities\User;
 use App\Modules\Authentication\Services\TokenGenerationService;
 
 class RefreshTokenAction
 {
-    public function __construct(private readonly TokenGenerationService $tokenGenerationService){}
+    public function __construct(private readonly TokenGenerationService $tokenGenerationService) {}
 
     public function execute(RefreshTokenRequestDTO $request): TokenCoupleDTO
     {
