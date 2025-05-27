@@ -17,13 +17,11 @@ use App\Modules\Exceptions\Http\HttpForbiddenException;
 use App\Modules\Exceptions\Http\HttpInternalServerException;
 use App\Modules\Exceptions\Http\HttpUnauthorizedException;
 use Illuminate\Http\JsonResponse;
-use OpenApi\Attributes\Components;
 use OpenApi\Attributes\JsonContent;
 use OpenApi\Attributes\Patch;
 use OpenApi\Attributes\Post;
 use OpenApi\Attributes\RequestBody;
 use OpenApi\Attributes\Response;
-use OpenApi\Attributes\SecurityScheme;
 
 class AuthController extends Controller
 {
@@ -47,7 +45,8 @@ class AuthController extends Controller
      * @throws HttpUnauthorizedException
      * @throws HttpForbiddenException
      */
-    #[Patch(path: '/api/auth/verify-email', tags: ['Authentication']),
+    #[
+        Patch(path: '/api/auth/verify-email', tags: ['Authentication']),
         Response(response: 200, description: 'email verified'),
         Response(response: 422, description: 'invalid input'),
         Response(response: 401, description: 'invalid verification code'),
@@ -63,7 +62,8 @@ class AuthController extends Controller
     /**
      * @throws HttpForbiddenException
      */
-    #[Post(path: '/api/auth/resend-verification-email', tags: ['Authentication']),
+    #[
+        Post(path: '/api/auth/resend-verification-email', tags: ['Authentication']),
         Response(response: 200, description: 'verification email sent'),
         Response(response: 422, description: 'invalid input'),
         Response(response: 403, description: 'email already verified or too many attempts'),
@@ -79,7 +79,8 @@ class AuthController extends Controller
      * @throws HttpUnauthorizedException
      * @throws HttpForbiddenException
      */
-    #[Post(path: '/api/auth/login', tags: ['Authentication']),
+    #[
+        Post(path: '/api/auth/login', tags: ['Authentication']),
         Response(response: 200, description: 'login', content: new JsonContent(ref: '#/components/schemas/TokenCoupleDTO')),
         Response(response: 401, description: 'invalid email or password'),
         Response(response: 403, description: 'email not verified'),
@@ -92,7 +93,8 @@ class AuthController extends Controller
         return response()->json(['access_token' => $cookieCouple->accessToken, 'refresh_token' => $cookieCouple->refreshToken]);
     }
 
-    #[Post(path: '/api/auth/refresh', security: ['bearerAuth'], tags: ['Authentication']),
+    #[
+        Post(path: '/api/auth/refresh', security: ['bearerAuth'], tags: ['Authentication']),
         Response(response: 200, description: 'refreshed', content: new JsonContent(ref: '#/components/schemas/TokenCoupleDTO')),
         Response(response: 422, description: 'invalid input'),
         Response(response: 403, description: 'expired or invalid ability'),
@@ -104,7 +106,8 @@ class AuthController extends Controller
         return response()->json(['access_token' => $cookieCouple->accessToken, 'refresh_token' => $cookieCouple->refreshToken]);
     }
 
-    #[Post(path: '/api/auth/logout', security: ['bearerAuth'], tags: ['Authentication']),
+    #[
+        Post(path: '/api/auth/logout', security: ['bearerAuth'], tags: ['Authentication']),
         Response(response: 200, description: 'logged out'),
         Response(response: 422, description: 'invalid input'),
         Response(response: 403, description: 'expired or invalid ability')
